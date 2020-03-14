@@ -1,16 +1,31 @@
 import React, { Component } from 'react';
 import classes from './Quiz.scss'
+import ActiveQuiz from '../../components/ActiveQuiz/ActiveQuiz';
 
 class Quiz extends Component {
 
   state = {
-    quiz: []
+    quiz: [
+      {
+        answers: [
+          { text: 'Question 1' },
+          { text: 'Question 2' },
+          { text: 'Question 3' },
+          { text: 'Question 4' }
+        ]
+      }
+    ]
   }
 
   render() {
     return (
       <div className={classes.Quiz}>
-        <h1>Quiz</h1>
+
+        <div className={classes.QuizWrapper}>
+          <h1>Quiz</h1>
+          <ActiveQuiz answers={this.state.quiz[0].answers} />
+        </div>
+
       </div>
     )
   }

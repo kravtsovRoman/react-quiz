@@ -6,8 +6,6 @@ const AnswerItem = (props) => {
 
   if (props.state) {
     cls.push(classes[props.state]);
-
-    console.log(classes)
   }
 
   return (

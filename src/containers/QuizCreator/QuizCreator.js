@@ -4,7 +4,7 @@ import Button from '../../components/UI/Button/Button';
 import Input from '../../components/UI/Input/Input';
 import { createControl, validate, validateForm } from '../../form/formFramework';
 import Select from '../../components/UI/Select/Select';
-import axios from 'axios';
+import axios from '../../axios/axios-quiz';
 
 function createOptionControl(number) {
   return createControl({
@@ -71,7 +71,7 @@ export default class QuizCreator extends Component {
 
     try {
       console.log(this.state.quiz)
-      await axios.post('https://quiz-cb9c8.firebaseio.com/quizes.json', this.state.quiz);
+      await axios.post('/quizes.json', this.state.quiz);
 
       this.setState({
         quiz: [],

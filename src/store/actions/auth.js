@@ -18,23 +18,21 @@ export function auth(email, password, isLogin) {
     const res = await axios.post(url, authData);
 
     const data = res.data;
-    const experationDate = new Date(new Date().getTime() + data.expireIn * 1000);
+    const experationDate = new Date(new Date().getTime() + data.expiresIn * 1000);
 
     localStorage.setItem('token', data.idToken);
     localStorage.setItem('userId', data.localId);
-    localStorage.setItem('experationDate', data.experationDate);
+    localStorage.setItem('experationDate', experationDate);
 
     dispatch(authSuccess(data.idToken));
-    dispatch(autoLogout(data.expireIn));
+    dispatch(autoLogout(data.expiresIn));
 
   }
 }
 
 export function autoLogout(time) {
   return dispatch => {
-    setTimeout(() => {
-      dispatch(logout())
-    }, time * 1000);
+    setTimeout(() => { dispatch(logout()) }, time * 1000);
   }
 }
 
@@ -48,6 +46,10 @@ export function logout() {
     type: AUTH_LOGOUT,
 
   }
+}
+
+export function autoLogin() {
+
 }
 
 export function authSuccess(token) {

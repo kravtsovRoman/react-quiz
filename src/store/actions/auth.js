@@ -49,7 +49,23 @@ export function logout() {
 }
 
 export function autoLogin() {
-
+  return dispatch => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      dispatch(logout());
+      console.log('logout')
+    } else {
+      const experationDate = new Date(localStorage.getItem('expirationDate'));
+      if (experationDate <= new Date()) {
+        dispatch(logout());
+        console.log('logout 2', localStorage.getItem('expirationDate'));
+      } else {
+        dispatch(authSuccess(token));
+        dispatch(autoLogout((experationDate.getTime() - new Date.getTime()) / 1000));
+        console.log('authSuccess')
+      }
+    }
+  }
 }
 
 export function authSuccess(token) {
